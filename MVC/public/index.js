@@ -1,0 +1,1 @@
+response.write("<p>MVC Public Index</p>");
