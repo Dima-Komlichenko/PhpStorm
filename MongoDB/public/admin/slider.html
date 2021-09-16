@@ -9,7 +9,7 @@
 
 </main>
 
-<form>
+<form name="newSlider">
     <input type="button" name="name"><br>
     <input type="button" name="Msg1"><br>
     <input type="button" name="Msg2"><br>
@@ -18,12 +18,28 @@
     <input type="button" name="url"><br>
     <input type="button" name="imgUrl"><br>
     <input type="button" name="linkText"><br>
-    <input type="button" if="btnSend"><br>
+    <input type="button" name="btnSend"><br>
 </form>
 
 <script>
     document.getElementById("btnSend").onclick = function (){
-        /*const Slider = new URLSearchParams(new FormData(document.getElementById("newSlider")));*/
+        let form = document.forms.newSlider;
+        let slide = {};
+        for(let i = 0; i < form.elements.length; i++){
+            slide[form.elements[i].name] = form.elements[i].value;
+        }
+        console.log(slide);
+
+        fetch(
+            "/api/slider", {
+                method:"post",
+                body:JSON.stringify(slide)
+
+            }
+        )
+        .then(res => {console.log(res)} )
+        .catch(err => { if(err) console.log(err);} );
+
     }
 </script>
 
